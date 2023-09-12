@@ -1,0 +1,32 @@
+
+<!-- Table from https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_th -->
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+    </style>
+    
+    <h1>United Shop</h1>
+    
+    <h5>Name: </h5>
+    <p>{{ name }}<p>
+    <h5>Class: </h5>
+    <p>{{ class }}<p>
+    
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+
+        <tr>
+            <td>{{ product }}</td>
+            <td>{{ amount }}</td>
+            <td>{{ description }}</td>
+            <td>{{ price }}</td>
+        </tr>
+        
+        
+    </table>
