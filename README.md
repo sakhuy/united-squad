@@ -1,4 +1,4 @@
-# Menjawab Pertanyaan
+# Tugas 2
 ## 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 ### Membuat sebuah proyek Django baru.
 pada direktori baru yang telah saya buat, saya membuat proyek Django baru "united_squad" dengan cara membuka terminal di direktori tersebut dan menulis kode ini.
@@ -113,3 +113,187 @@ MVC, MVT, dan MVVM adalah pola desain yang digunakan dalam pengembangan perangka
    MVVM adalah pola desain yang sering digunakan dalam pengembangan aplikasi berbasis mobile dengan kerangka kerja seperti Angular, Vue.js, dan beberapa platform mobile seperti Flutter.
 
 Perbedaan utama antara ketiganya adalah dalam cara mereka mengatur dan mengelola tampilan (UI) dalam aplikasi. MVC lebih umum digunakan dalam pengembangan perangkat lunak desktop, MVT adalah pendekatan yang digunakan dalam kerangka kerja web Django, sedangkan MVVM adalah pendekatan yang umum digunakan dalam pengembangan aplikasi berbasis mobile.
+
+
+# Tugas 3
+## 1. Apa perbedaan antara form POST dan form GET dalam Django?
+POST dan GET merupakan dua metode berbeda untuk mengirim sebuah data dari form HTML ke server
+POST:
+* data form dikirimkan sebagai bagian dari permintaan HTTP yang tidka terlihat user
+* digunakan ketika ingin mengirim data yang mungkin akan memengaruhi server.
+* gunakan metode ini jika ingin mengirim data yang sensitif
+GET:
+* data form ditambahkan ke URL sebagai parameter query string yang terlihat user
+* digunakan ketika ingin mengambil atau mencari informasi dari server
+* gunakan metode ini untuk operasi read-only atau ingin memungkinkan user dengan mudah membagikan hasilnya.
+
+## 2. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+* XML dirancang untuk menyimapan dan mengirim data struktural. XML adalah format yang sangat fleksibel dan kuat untuk mendefinisikan struktur data yang kompleks. Biasanya digunakan dalam berbagai konteks, termasuk pertukaran data antara sistem yang berbeda, konfigurasi file, dan penyimpanan data
+* JSON dirancang untuk pertukaran data ringan dan mudah dibaca antara aplikasi berbasis web. JSON dapat mewakili struktur data sederhana atau kompleks, tapi tidak sefleksibel XML dalam hal definisi struktur data. Digunakan dalamkonteks pertukaran data di web
+* HTML dirancang untuk mendefinisikan struktur dan presentasi dokumen web. Karena fokus utamanya bukan data, HTML tidak sefleksibel dalam hal definisi struktur data seperti XML atau JSON. Digunakan untuk membaut halaman web yang dapat diakses oleh browser web. tidak umum digunakan untuk tujuan pertukuran data murni
+
+## 3. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+Seperti yang sudah dijelaskan sebelumnya. JSON (JavaScript Object Notation) memiliki format pertukaran data yang sangat ringan serta lebih mudah dibaca dan ditulis oleh manusia. JSON memiliki ukuran file yang lebih kecil dan transmisi data yang lebih cepat. JSON juga dapat diurai dengan fungsi JavaScript standar.
+
+## 4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.
+### Membuat input form untuk menambahkan objek model pada app sebelumnya.
+*Membuat `base.html` yang digunakan sebagai template untuk templates html yang ada
+~~~
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        {% block meta %}
+        {% endblock meta %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
+~~~
+*Mengedit `TEMPLATES` pada `settings.py` agar `base.html` terdeteksi
+~~~
+...
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        ...
+~~~
+*mengedit `main.html` untuk meng-extend dari `base.html`
+~~~
+{% extends 'base.html' %}
+...
+~~~
+*membuat file `forms.py` untuk membuat form input dan mengimportnya ke file `views.py`
+~~~
+from django.forms import ModelForm
+from main.models import Product
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ["name", "amount", "description", "price"]
+~~~
+properti dari form yang dibuat bia didapatkan dengan mengimport `ModelForm`. class `ProductForm` yang dibuat akan menginherit `ModelForm` dan memberikan properti `model` dan memanbahkan field pada properti model
+*Membuat fungsi `create_product` untuk menambahkan data produk secara otomatis
+~~~
+def create_product(request):
+    form = ProductForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+~~~
+*Mengubah fungsi `show_main` supaya data bisa diakses pada `main.html`
+~~~
+def show_main(request):
+    products = Product.objects.all()
+    
+    context = {
+        'name': 'Rayhan Dwi Sakha',
+        'class': 'PBP E',
+        'product': products
+    }
+
+    return render(request, "main.html", context)
+~~~
+*Membuat `create_product.html` untuk menambahkan objek baru.
+~~~
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Add New Product</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Product"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+~~~
+### Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
+* fungsi `show_main` format HTML
+~~~
+def show_main(request):
+    products = Product.objects.all()
+    
+    context = {
+        'name': 'Rayhan Dwi Sakha',
+        'class': 'PBP E',
+        'product': products
+    }
+
+    return render(request, "main.html", context)
+~~~
+* fungsi `show_xml`
+~~~
+def show_xml(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+~~~
+* fungsi `show_json`
+~~~
+def show_json(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+~~~
+* fungsi `show_xml_by_id`
+~~~
+def show_xml_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+~~~
+* fungsi `show_json_by_id`
+~~~
+def show_json_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+~~~
+
+menambahkan url untuk kelima fungsi agar dapat diakses sesuai dengan url nya masing-masing
+~~~
+from django.urls import path
+from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id
+
+app_name = 'main'
+
+urlpatterns = [
+    path('', show_main, name='show_main'),
+    path('create-product', create_product, name='create_product'),
+    path('xml/', show_xml, name='show_xml'),
+    path('json/', show_json, name='show_json'), 
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
+]
+~~~
+### Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
+* HTML
+![postman HMTL](README_images/HTML_postman.png)
+* JSON
+![postman JSON](README_images/JSON_postman.png)
+* XML
+![postman XML](README_images/XML_postman.png)
+* JSON by id
+![postman JSON by id](README_images/JSON_id_postman.png)
+* XML by id
+![postman XML by id](README_images/XML_id_postman.png)
