@@ -579,7 +579,7 @@ Untuk mengamankan penggunaan cookies, disarankan untuk menggunakan HTTPS (teruta
     ~~~
     from django.contrib.auth.models import User
     ~~~
-* Menambahkan atribut user pada model Oculi
+* Menambahkan atribut user pada model Product
     ~~~
     class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
