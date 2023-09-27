@@ -1,12 +1,15 @@
 
 <!-- Table from https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_th -->
+{% extends 'base.html' %}
+
+{% block content %}
 <style>
     table, th, td {
       border: 1px solid black;
     }
     </style>
     
-    <h1>United Shop</h1>
+    <h1 align="center">United Shop</h1>
     
     <h5>Name: </h5>
     <p>{{ name }}<p>
@@ -21,12 +24,49 @@
             <th>Price</th>
         </tr>
 
-        <tr>
-            <td>{{ product }}</td>
-            <td>{{ amount }}</td>
-            <td>{{ description }}</td>
-            <td>{{ price }}</td>
-        </tr>
-        
-        
+        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+    
+        {% for product in products %}
+            <tr>
+                <td align="center">{{product.name}}</td>
+                <td align="center">{{product.amount}}
+                    <form method="post" action="{% url 'main:plus_amount' product.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary mx-1">+</button>
+                    </form>
+                    <form method="post" action="{% url 'main:minus_amount' product.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary mx-1">-</button>
+                    </form>
+                </td>
+                <td>{{product.description}}</td>
+                <td align="center">{{product.price}}</td>
+                <td class="d-flex align-items-center">
+                    <form method="post" action="{% url 'main:remove_product' product.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary mx-1">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
     </table>
+    
+    <br />
+    
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+    
+    <a href="{% url 'main:create_product' %}">
+        <button>
+            Add New Product
+        </button>
+    </a>
+
+
+
+    <a href="{% url 'main:logout' %}">
+        <button>
+            Logout
+        </button>
+    </a>
+    
+{% endblock content %}
