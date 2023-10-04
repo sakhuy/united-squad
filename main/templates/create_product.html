@@ -1,9 +1,9 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<h1>Add New Product</h1>
+<!-- <h1>Add New Product</h1> -->
 
-<form method="POST">
+<!-- <form method="POST">
     {% csrf_token %}
     <table>
         {{ form.as_table }}
@@ -14,6 +14,43 @@
             </td>
         </tr>
     </table>
-</form>
+</form> -->
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="my-5 display-3 fw-bold ls-tight">
+                        Add Product <br />
+                    </h1>
+                    <p style="color: hsl(218, 13%, 28%)">
+                       Input produk baru yang ingin dijual.
+                    </p>
+                </div>
 
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card">
+                        <div class="card-body py-5 px-md-5">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <table>
+                                    {{ form.as_table }}
+                                </table>
+                                <div class="text-center mb-4">
+                                    <button type="submit" class="btn btn-primary">Add Product</button>
+                                </div>
+                            </form>                            
+                            <div class="text-center mb-4">
+                                <a href="{% url 'main:login' %}" class="btn btn-link">Back to Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
 {% endblock %}

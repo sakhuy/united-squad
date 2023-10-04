@@ -5,41 +5,59 @@
 {% endblock meta %}
 
 {% block content %}
+<section class="login">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="my-5 display-3 fw-bold ls-tight">
+                        United Shop <br />
+                        <span class="text-primary">Login</span>
+                    </h1>
+                </div>
 
-<div class = "login">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card">
+                        <div class="card-body py-5 px-md-5">
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <table>
+                                    <tr>
+                                        <td>Username: </td>
+                                        <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                                    </tr>
+                                            
+                                    <tr>
+                                        <td>Password: </td>
+                                        <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                                    </tr>
 
-    <h1>Login</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><input class="btn login_btn" type="submit" value="Login"></td>
+                                    </tr>
+                                </table>
                     
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
-
-</div>
+                            </form>                            
+                            {% if messages %}  
+                            <ul class="mt-4">   
+                                {% for message in messages %}  
+                                <li class="alert alert-info">{{ message }}</li>  
+                                {% endfor %}  
+                            </ul>   
+                            {% endif %}
+                            <div class="text-center mb-4">
+                                Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
 
 {% endblock content %}

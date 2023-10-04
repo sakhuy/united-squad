@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.core import serializers
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm  
 from django.contrib import messages  
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -57,13 +58,14 @@ def show_json_by_id(request, id):
 
 def register(request):
     form = UserCreationForm()
-
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
+    if request.POST == 'POST':  
+        form = CustomUserCreationForm()  
+        if form.is_valid():  
+            form.save()  
             messages.success(request, 'Your account has been successfully created!')
             return redirect('main:login')
+    else:  
+        form = CustomUserCreationForm()  
     context = {'form':form}
     return render(request, 'register.html', context)
 
@@ -102,6 +104,20 @@ def minus_amount(request, id):
         product.save()
     response = HttpResponseRedirect(reverse("main:show_main"))
     return response
+
+def edit_product(request, id):
+    product = Product.objects.get(pk = id)
+
+    # Set product sebagai instance dari form
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
 
 def remove_product(request, id):
     Product.objects.filter(pk=id).delete()

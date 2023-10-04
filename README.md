@@ -597,3 +597,44 @@ Untuk mengamankan penggunaan cookies, disarankan untuk menggunakan HTTPS (teruta
         return HttpResponseRedirect(reverse('main:show_main'))
     ~~~
 
+# Tugas 5
+## 1. Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+* Element Selector (`tag`): Memilih semua elemen dengan nama tag tertentu. Ini digunakan ketika Anda ingin menerapkan gaya ke semua elemen dari satu jenis.
+* Class Selector (`.class`): Memilih semua elemen yang memiliki kelas tertentu. Berguna ketika Anda ingin menerapkan gaya yang sama pada beberapa elemen.
+* ID Selector (`#id`): Memilih elemen dengan ID tertentu. Khusus untuk satu elemen dengan ID unik pada halaman.
+* Universal Selector (`*`): Memilih semua elemen pada halaman. Digunakan dengan hati-hati karena dapat mempengaruhi kinerja halaman.
+* Pseudo-class Selector (`:pseudo-class`): Memilih elemen berdasarkan keadaan atau interaksi pengguna, seperti :hover, :active, dll.
+## 2. Jelaskan HTML5 Tag yang kamu ketahui.
+* `<header>`: Mendefinisikan kepala dari sebuah dokumen atau bagian.
+* `<section>`: Mendefinisikan bagian dari dokumen.
+* `<article>`: Mendefinisikan artikel independen di dalam dokumen.
+* `<nav>`: Mendefinisikan navigasi di dokumen.
+* `<footer>`: Mendefinisikan kaki dari sebuah dokumen atau bagian.
+## 3. Jelaskan perbedaan antara margin dan padding.
+* Margin: Ruang di luar batas elemen. Menentukan jarak antara elemen dengan elemen lainnya di sekitarnya.
+* Padding: Ruang di dalam batas elemen. Menentukan jarak antara konten elemen dan batas elemen itu sendiri.
+## 4. Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+Tailwind CSS:
+* Utility-First: Memfokuskan pada pembuatan antarmuka dengan memanfaatkan kelas utilitas, yang memungkinkan fleksibilitas tinggi dalam desain.
+* Customizable: Memungkinkan penyesuaian besar-besaran melalui konfigurasi atau ekstensi.
+* Lebih Kecil: Tailwind lebih ringan karena hanya menyediakan kelas dasar yang diperlukan.
+
+Bootstrap:
+*Component-Oriented: Lebih fokus pada komponen yang siap pakai.
+*Lebih Terstruktur: Memberikan panduan yang lebih ketat untuk desain dan tata letak.
+*Siap Pakai: Menyediakan berbagai komponen dan gaya desain siap pakai.
+
+
+Bootstrap: Direkomendasikan jika ingin solusi desain cepat, memiliki banyak komponen dan layout siap pakai, atau jika lebih suka pendekatan komponen-tertentu.
+Tailwind CSS: Direkomendasikan jika ingin lebih fleksibel dalam desain tanpa harus menulis banyak CSS khusus. Cocok untuk yang lebih suka mengontrol setiap detail desain.
+
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+### Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin.
+* register
+![postman HMTL](README_images/register.png)
+* login
+![postman HMTL](README_images/login.png)
+* add Product
+![postman HMTL](README_images/addProduct.png)
+
+### Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.

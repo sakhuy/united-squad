@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id, register, login_user, logout_user, plus_amount, minus_amount, remove_product
+from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id, register, login_user, logout_user, plus_amount, minus_amount, edit_product, remove_product
 
 app_name = 'main'
 
@@ -15,5 +15,6 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('plus_amount/<int:id>', plus_amount, name='plus_amount'),
     path('minus_amount/<int:id>', minus_amount, name='minus_amount'),
+    path('edit-product/<int:id>', edit_product, name='edit_product'),
     path('remove_product/<int:id>', remove_product, name='remove_product'),
 ]
