@@ -638,3 +638,34 @@ Tailwind CSS: Direkomendasikan jika ingin lebih fleksibel dalam desain tanpa har
 ![postman HMTL](README_images/addProduct.png)
 
 ### Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.
+
+# Tugas 6
+
+## 1. Perbedaan antara Asynchronous Programming dan Synchronous Programming:
+
+   - **Synchronous Programming:** Dalam synchronous programming, tugas-tugas dieksekusi secara berurutan satu per satu. Artinya, satu tugas harus selesai sebelum tugas berikutnya dapat dimulai. Jika ada tugas yang membutuhkan waktu lama untuk menyelesaikan operasi (seperti mengunduh file besar), maka seluruh eksekusi akan terhenti sampai tugas tersebut selesai.
+
+   - **Asynchronous Programming:** Pada asynchronous programming, tugas-tugas dapat dieksekusi secara bersamaan tanpa harus menunggu tugas sebelumnya selesai. Ini berarti program dapat melanjutkan menjalankan tugas-tugas lain selama ada operasi yang memakan waktu lama sedang berlangsung.
+
+## 2. Paradigma Event-Driven Programming:
+
+   Paradigma event-driven programming adalah pendekatan di mana program menunggu dan merespons terhadap kejadian atau event yang terjadi. Sebuah event bisa menjadi apa saja, seperti klik mouse, input pengguna, atau bahkan respons dari server. Dalam paradigma ini, program akan mendengarkan atau "menunggu" event dan merespons sesuai dengan apa yang terjadi.
+   
+   Contoh penerapannya dalam tugas ini adalah ketika pengguna menekan tombol "Add Product by AJAX". Ketika tombol ini ditekan, sebuah peristiwa (event) terjadi, dan JavaScript akan menanggapi peristiwa ini dengan menjalankan fungsi addProduct yang telah didefinisikan. Fungsi addProduct akan melakukan permintaan AJAX POST untuk menambahkan item baru ke dalam basis data tanpa harus me-refresh seluruh halaman. Setelah item berhasil ditambahkan, daftar item akan diperbarui secara asinkronus tanpa memuat ulang halaman utama secara keseluruhan.
+
+## 3. Penerapan Asynchronous Programming pada AJAX:
+
+   Dalam AJAX (Asynchronous JavaScript and XML), asynchronous programming digunakan untuk melakukan permintaan ke server tanpa menghentikan eksekusi kode lain di halaman web. Dengan menggunakan asynchronous programming, Anda dapat membuat permintaan ke server dan meneruskan eksekusi kode tanpa harus menunggu respons dari server.
+
+   Ini penting karena operasi jaringan (seperti mengambil data dari server) seringkali membutuhkan waktu yang tidak dapat diprediksi. Dengan asynchronous programming, Anda dapat melanjutkan eksekusi kode lain sambil menunggu respons dari server.
+
+## 4. Fetch API vs jQuery:
+
+   - **Fetch API:** API bawaan di JavaScript modern yang memungkinkan membuat permintaan HTTP dengan cara yang lebih modern dan fleksibel. Ini mengembalikan Promise, yang memungkinkan untuk menggunakannya bersama dengan asynchronous programming. Fetch API ringan, mudah dipahami, dan bekerja dengan baik bersama konsep modern seperti Promises dan async/await.
+
+   - **jQuery:** jQuery adalah pustaka JavaScript yang memberikan berbagai utilitas dan fungsi untuk memanipulasi DOM dan melakukan operasi jaringan seperti AJAX dengan mudah. Namun, jQuery cenderung lebih besar dalam ukuran dan mungkin tidak selalu diperlukan jika hanya membutuhkan fitur AJAX.
+
+   **Pendapat Saya:**
+   Jika bekerja dalam konteks modern dan hanya membutuhkan fungsionalitas AJAX, maka Fetch API adalah pilihan yang baik. Ini adalah cara yang lebih bersih dan ringan untuk melakukan operasi jaringan dalam JavaScript.
+
+   Namun, jika bekerja di proyek besar yang memanfaatkan banyak fitur dari jQuery atau membutuhkan kompatibilitas dengan browser lama, maka menggunakan jQuery masih dapat menjadi pilihan yang masuk akal.
